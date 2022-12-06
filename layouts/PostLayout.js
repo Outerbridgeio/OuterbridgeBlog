@@ -24,7 +24,7 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
 
   const onCopy = () => {
     setCopied(true)
-    navigator.clipboard.writeText(templates[template])
+    navigator.clipboard.writeText(JSON.stringify(templates[template]))
     setTimeout(() => {
       setCopied(false)
     }, 5000)
