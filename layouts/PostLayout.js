@@ -7,6 +7,8 @@ import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import Comments from '@/components/comments'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
+import { useState } from 'react'
+import { templates } from '@/data/template.js'
 
 const editUrl = (fileName) => `${siteMetadata.siteRepo}/blob/master/data/blog/${fileName}`
 const discussUrl = (slug) =>
@@ -17,7 +19,16 @@ const discussUrl = (slug) =>
 const postDateTemplate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
 
 export default function PostLayout({ frontMatter, authorDetails, next, prev, children }) {
-  const { slug, fileName, date, title, images, tags } = frontMatter
+  const { slug, fileName, date, title, images, tags, template } = frontMatter
+  const [copied, setCopied] = useState(false)
+
+  const onCopy = () => {
+    setCopied(true)
+    navigator.clipboard.writeText(templates[template])
+    setTimeout(() => {
+      setCopied(false)
+    }, 5000)
+  }
 
   return (
     <SectionContainer>
@@ -87,6 +98,7 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
             </dl>
             <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
               <div className="prose max-w-none pt-10 pb-8 dark:prose-dark">{children}</div>
+              {/* 
               <div className="pt-6 pb-6 text-sm text-gray-700 dark:text-gray-300">
                 <Link href={discussUrl(slug)} rel="nofollow">
                   {'Discuss on Twitter'}
@@ -94,6 +106,7 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
                 {` • `}
                 <Link href={editUrl(fileName)}>{'View on GitHub'}</Link>
               </div>
+              */}
               <Comments frontMatter={frontMatter} />
             </div>
             <footer>
@@ -108,6 +121,24 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
                         <Tag key={tag} text={tag} />
                       ))}
                     </div>
+                  </div>
+                )}
+                {tags && tags.includes('Template') && (
+                  <div className="py-4 xl:py-8">
+                    <button
+                      style={{ height: 50 }}
+                      className={`w-full rounded-md bg-primary-500 py-2 px-4 font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2
+                      focus:ring-primary-600 focus:ring-offset-2 dark:ring-offset-black dark:hover:bg-primary-400 sm:py-0`}
+                      onClick={onCopy}
+                    >
+                      {copied ? 'Copied!' : 'Use Template'}
+                    </button>
+                    {copied && (
+                      <div className="mt-3 text-sm tracking-wide text-gray-500 dark:text-gray-400">
+                        Workflow has been copied to your clipboard. You can paste it in Outerbridge
+                        and start the workflow 🚀
+                      </div>
+                    )}
                   </div>
                 )}
                 {(next || prev) && (

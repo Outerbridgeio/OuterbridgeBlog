@@ -1,0 +1,66 @@
+---
+title: 'ThirdWeb integration on Outerbridge'
+date: '2022-12-03'
+lastmod: '2022-12-03'
+tags: ['ThirdWeb', 'Announcement']
+draft: false
+summary: 'ThirdWeb is a thirdweb is an end to end developer tool accelerating teams building web3 apps, games, tokens, NFTs..'
+authors: ['default']
+---
+
+![image](https://outerbridgepage.s3.eu-west-1.amazonaws.com/ThirdWebXOuterbridge.png)
+
+## 🎉 ThirdWeb node has been added! 🎉
+
+[ThirdWeb](https://www.thirdweb.com/) is an end to end developer tool accelerating teams building web3 apps, games, tokens, NFTs, marketplaces, DAOs and more.
+It enables users to add features such as NFTs, marketplaces, and social tokens to their Web3 projects with simple sdk or one liner code.
+
+Read more on ThirdWeb [here](https://portal.thirdweb.com/)
+
+With this integration, users can easily use ThirdWeb node to build a powerful workflow.
+
+![image](https://outerbridgepage.s3.eu-west-1.amazonaws.com/ThirdWeb.gif)
+
+## Steps
+
+1. Add ThirdWeb node onto canvas
+2. Select node action
+   - Read data from contracts
+   - Execute transactions on contracts (\*requires wallet)
+3. Select network
+4. Configure input parameters
+
+   - First, navigate to ThirdWeb project, under the `Code` -> `Javascript` -> `Getting Started` section, you will see similar code as below:
+
+   ```jsx
+   import { ThirdwebSDK } from '@thirdweb-dev/sdk'
+
+   const sdk = new ThirdwebSDK('goerli')
+   const contract = await sdk.getContract('0x6a8c7F715D5f044437dA5b0576eD1289eC9b7eB6', 'nft-drop')
+   ```
+
+   - Back to ThirdWeb node on Outerbridge, fill in the parameters:
+
+     - Contract Address = `0x6a8c7F715D5f044437dA5b0576eD1289eC9b7eB6`
+     - Prebuilt Contract Type = `nft-drop`
+
+   - Now, you can copy paste the function you want to execute or query. For instance: **Get NFT Balance**
+
+   ```jsx
+   const walletAddress = '0xE597E474889537A3A9120d1B5793cdFAEf6B6c10'
+   const balance = await contract.balanceOf(walletAddress)
+   return balance
+   ```
+
+   - You can also import and use additional libraries such as `ethers`, `@openzeppelin/contracts` and use it together within the Code parameter:
+
+   ```jsx
+   const ethers = require('ethers')
+   const walletAddress = '0xE597E474889537A3A9120d1B5793cdFAEf6B6c10'
+   const balance = await contract.balanceOf(walletAddress)
+   return ethers.utils.formatEther(balance)
+   ```
+
+5. Select wallet you'd like to sign the transaction on-chain if you have chosen `Execute transaction on contracts` in action.
+
+6. Test the node, save and deploy!
