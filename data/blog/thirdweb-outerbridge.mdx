@@ -36,19 +36,19 @@ With this integration, users can easily use ThirdWeb node to build a powerful wo
    ```jsx
    import { ThirdwebSDK } from '@thirdweb-dev/sdk'
 
-   const sdk = new ThirdwebSDK('goerli')
-   const contract = await sdk.getContract('0x6a8c7F715D5f044437dA5b0576eD1289eC9b7eB6', 'nft-drop')
+   const sdk = new ThirdwebSDK('<network>')
+   const contract = await sdk.getContract('<Contract-Address>', '<Prebuilt-Type>')
    ```
 
-   - Back to ThirdWeb node on Outerbridge, fill in the parameters:
+   - Back to ThirdWeb node on Outerbridge, fill in the parameters accordingly:
 
-     - Contract Address = `0x6a8c7F715D5f044437dA5b0576eD1289eC9b7eB6`
-     - Prebuilt Contract Type = `nft-drop`
+     - Contract Address: `<Contract-Address>`
+     - Prebuilt Contract Type: `<Prebuilt-Type>`
 
    - Now, you can copy paste the function you want to execute or query. For instance: **Get NFT Balance**
 
    ```jsx
-   const walletAddress = '0xE597E474889537A3A9120d1B5793cdFAEf6B6c10'
+   const walletAddress = '<Wallet-Address>'
    const balance = await contract.balanceOf(walletAddress)
    return balance
    ```
@@ -57,7 +57,7 @@ With this integration, users can easily use ThirdWeb node to build a powerful wo
 
    ```jsx
    const ethers = require('ethers')
-   const walletAddress = '0xE597E474889537A3A9120d1B5793cdFAEf6B6c10'
+   const walletAddress = '<Wallet-Address>'
    const balance = await contract.balanceOf(walletAddress)
    return ethers.utils.formatEther(balance)
    ```

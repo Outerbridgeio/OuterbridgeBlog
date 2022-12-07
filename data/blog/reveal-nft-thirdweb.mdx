@@ -1,0 +1,146 @@
+---
+title: 'How to create and reveal hidden NFTs'
+date: '2022-12-06'
+lastmod: '2022-12-06'
+tags: ['ThirdWeb', 'Template', 'NFT']
+draft: false
+summary: 'Create workflows that will create encrypted/hidden NFTs, and reveal them at a scheduled date and time'
+authors: ['default']
+images: ['/static/images/reveal-nft-thirdweb/thirdweb-reveal-nft.png']
+template: 'thirdweb-reveal-nft'
+---
+
+![image](/static/images/reveal-nft-thirdweb/thirdweb-reveal-nft.png)
+
+## How to create and reveal hidden NFTs
+
+Using [ThirdWeb](https://www.thirdweb.com/), developers can easily create encrypted NFTs and schedule a time to reveal these hidden NFTs.
+To achieve this, we are going to seperate the steps into 2 workflow templates:
+
+- **Create Encrypted/Hidden NFTs**
+- **Reveal NFTs**
+
+### Create Encrypted/Hidden NFTs
+
+![image](/static/images/reveal-nft-thirdweb/create-encrypted-nft.png)
+
+import { useState } from 'react'
+import { templates } from '@/data/template.js'
+
+export const MyDynamicButton = ({buttonText, copyTemplate}) => {
+  const [count, setCount] = useState(0)
+  const [copied, setCopied] = useState(false)
+
+const onCopy = () => {
+setCopied(true)
+navigator.clipboard.writeText(JSON.stringify(templates[copyTemplate]))
+setTimeout(() => {
+setCopied(false)
+}, 5000)
+}
+
+return <button style={{ height: 50 }}
+className={`w-full rounded-md bg-primary-500 py-2 px-4 font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 dark:ring-offset-black dark:hover:bg-primary-400 sm:py-0`} onClick={onCopy}>{copied ? 'Workflow Copied ✅' : buttonText } </button>
+}
+
+<MyDynamicButton
+  buttonText="Use Create Encrypted NFTs Workflow"
+  copyTemplate="thirdweb-create-encrypted-nft"
+/>
+
+1.  Add 2 Thirdweb nodes onto canvas, or simply paste the copied workflow 👆
+2.  In the first node, we are going to create a batch of encrypted NFTs.
+
+    Configure the first node as followed:
+
+    - [x] **Action**: `Execute transactions on contracts`
+    - [x] **Network**: Select network of the project
+    - [x] **Input Parameters**:
+          Navigate to ThirdWeb project, under the `Code` -> `Javascript` -> `Getting Started` section, you will see similar code as below:
+
+           ```jsx
+           import { ThirdwebSDK } from '@thirdweb-dev/sdk'
+
+           const sdk = new ThirdwebSDK('<network>')
+           const contract = await sdk.getContract('<Contract-Address>', '<Prebuilt-Type>')
+           ```
+
+           Back to ThirdWeb node on Outerbridge, fill in the parameters accordingly:
+
+           - Contract Address: `<Contract-Address>`
+           - Prebuilt Contract Type: `<Prebuilt-Type>`
+           - Code: Copy paste the function you want to execute or query from ThirdWeb. For instance: **Delayed reveal**:
+           ```jsx
+           // the real NFTs, these will be encrypted until you reveal them
+           const realNFTs = [{
+             name: "Common NFT #1",
+             description: "Common NFT, one of many.",
+             image: "https://avatars.dicebear.com/api/micah/123.svg"
+           }, {
+             name: "Super Rare NFT #2",
+             description: "You got a Super Rare NFT!",
+             image: "https://avatars.dicebear.com/api/micah/456.svg"
+           }];
+
+           // A placeholder NFT that people will get immediately in their wallet, and will be converted to the real NFT at reveal time
+           const placeholderNFT = {
+             name: "Hidden NFT",
+             description: "Will be revealed next week!"
+           };
+
+           // Create and encrypt the NFTs
+           const tx = await contract.revealer.createDelayedRevealBatch(
+             placeholderNFT,
+             realNFTs,
+             "mysecret",
+           );
+
+           return tx;
+           ```
+
+           - Wallet: Select wallet you'd like to sign the transaction on-chain, i.e creating the NFT batch
+
+3.  For the second node, we are going to retrieve batches of hidden NFTs. The same steps apply with following changes:
+
+    - [x] **Action**: `Read data from contracts`
+    - [x] **Code**:
+      ```jsx
+      const batches = await contract.revealer.getBatchesToReveal()
+      return batches
+      ```
+
+4.  Finally, we can start to execute the nodes. At the top right side, click the yellow lightning button ⚡
+
+    A modal will pops up to allow you to select starting node, workflow will then be executed from the starting node till the end.
+
+    ![image](/static/images/reveal-nft-thirdweb/create-encrypted-nft-2.png)
+
+5.  After nodes have finished executing, you should see the hidden NFTs in ThirdWeb NFT dashboard.
+
+    ![image](/static/images/reveal-nft-thirdweb/hidden-nft.png)
+
+### Reveal Encrypted/Hidden NFTs
+
+![image](/static/images/reveal-nft-thirdweb/reveal-encrypted-nft.png)
+
+<MyDynamicButton buttonText="Use Reveal NFTs Workflow" copyTemplate="thirdweb-reveal-nft" />
+
+1.  Add 1 Scheduler node and ThirdWeb node onto canvas, or simply paste the copied workflow 👆
+
+2.  In the Scheduler node, configure the specific time you want to trigger the workflow
+
+3.  In the ThirdWeb node, configure as below:
+
+    - [x] **Action**: `Execute transactions on contracts`
+    - [x] **Code**:
+      ```jsx
+      const batchId = 0 // the batch to reveal
+      const tx = await contract.revealer.reveal(batchId, 'mysecret')
+      return tx
+      ```
+
+4.  Workflow is now ready! Now save and deploy it. If you want to reveal NFT now, you can also click the `Test Node` button which will kicks off the reveal function immediately.
+
+5.  Navigate to ThirdWeb dashboard, refresh the page and you should now see the hidden NFT has been revealed 🥳
+
+    ![image](/static/images/reveal-nft-thirdweb/revealed-nft.png)
