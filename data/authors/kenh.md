@@ -1,4 +1,4 @@
 ---
 name: Kevin O'Mahony
-avatar: /static/images/avatar2.png
+avatar: https://outerbridgepage.s3.eu-west-1.amazonaws.com/avatar2.png
 ---

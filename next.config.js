@@ -66,6 +66,9 @@ module.exports = withBundleAnalyzer({
       },
     ]
   },
+  images: {
+    domains: ['outerbridgepage.s3.eu-west-1.amazonaws.com'],
+  },
   webpack: (config, { dev, isServer }) => {
     config.module.rules.push({
       test: /\.svg$/,

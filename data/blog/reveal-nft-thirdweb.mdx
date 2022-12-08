@@ -6,11 +6,12 @@ tags: ['ThirdWeb', 'Template', 'NFT']
 draft: false
 summary: 'Create workflows that will create encrypted/hidden NFTs, and reveal them at a scheduled date and time'
 authors: ['default']
-images: ['/static/images/reveal-nft-thirdweb/thirdweb-reveal-nft.png']
+images:
+  ['https://outerbridgepage.s3.eu-west-1.amazonaws.com/reveal-nft-thirdweb/thirdweb-reveal-nft.png']
 template: 'thirdweb-reveal-nft'
 ---
 
-![image](/static/images/reveal-nft-thirdweb/thirdweb-reveal-nft.png)
+![image](https://outerbridgepage.s3.eu-west-1.amazonaws.com/reveal-nft-thirdweb/thirdweb-reveal-nft.png)
 
 ## How to create and reveal hidden NFTs
 
@@ -22,7 +23,7 @@ To achieve this, we are going to seperate the steps into 2 workflow templates:
 
 ### Create Encrypted/Hidden NFTs
 
-![image](/static/images/reveal-nft-thirdweb/create-encrypted-nft.png)
+![image](https://outerbridgepage.s3.eu-west-1.amazonaws.com/reveal-nft-thirdweb/create-encrypted-nft.png)
 
 import { useState } from 'react'
 import { templates } from '@/data/template.js'
@@ -113,15 +114,15 @@ className={`w-full rounded-md bg-primary-500 py-2 px-4 font-medium text-white ho
 
     A modal will pops up to allow you to select starting node, workflow will then be executed from the starting node till the end.
 
-    ![image](/static/images/reveal-nft-thirdweb/create-encrypted-nft-2.png)
+    ![image](https://outerbridgepage.s3.eu-west-1.amazonaws.com/reveal-nft-thirdweb/create-encrypted-nft-2.png)
 
 5.  After nodes have finished executing, you should see the hidden NFTs in ThirdWeb NFT dashboard.
 
-    ![image](/static/images/reveal-nft-thirdweb/hidden-nft.png)
+    ![image](https://outerbridgepage.s3.eu-west-1.amazonaws.com/reveal-nft-thirdweb/hidden-nft.png)
 
 ### Reveal Encrypted/Hidden NFTs
 
-![image](/static/images/reveal-nft-thirdweb/reveal-encrypted-nft.png)
+![image](https://outerbridgepage.s3.eu-west-1.amazonaws.com/reveal-nft-thirdweb/reveal-encrypted-nft.png)
 
 <MyDynamicButton buttonText="Use Reveal NFTs Workflow" copyTemplate="thirdweb-reveal-nft" />
 
@@ -143,4 +144,4 @@ className={`w-full rounded-md bg-primary-500 py-2 px-4 font-medium text-white ho
 
 5.  Navigate to ThirdWeb dashboard, refresh the page and you should now see the hidden NFT has been revealed 🥳
 
-    ![image](/static/images/reveal-nft-thirdweb/revealed-nft.png)
+    ![image](https://outerbridgepage.s3.eu-west-1.amazonaws.com/reveal-nft-thirdweb/revealed-nft.png)
