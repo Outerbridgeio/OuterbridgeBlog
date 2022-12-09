@@ -1,0 +1,71 @@
+---
+title: 'How to listen for Webhook'
+date: '2022-12-09'
+lastmod: '2022-12-09'
+tags: ['Moralis', 'Webhook', 'Template']
+draft: false
+summary: 'Listen for webhook event from Moralis and post a message to Discord channel, all without code!'
+authors: ['default']
+images: ['https://outerbridgepage.s3.eu-west-1.amazonaws.com/listen-webhook/banner.png']
+template: 'listen-webhook'
+---
+
+![image](https://outerbridgepage.s3.eu-west-1.amazonaws.com/listen-webhook/banner.png)
+
+## How to listen for Webhook
+
+In this example, we are going to create a workflow that will gets triggerred whenever a new event is emitted from smart contract through [Moralis Stream](https://moralis.io/streams/), and post a message to Discord channel.
+
+## What is Moralis?
+
+[Moralis](https://moralis.io/) provides world-class APIs to developers across the globe, allowing companies and projects of all sizes to seamlessly integrate blockchain into their solutions stack and scale with ease.
+
+[Moralis Stream](https://moralis.io/streams/) is a feature that stream blockchain data into your backend via webhooks.
+
+## Workflow Configuration
+
+The workflow template can be copy paste onto Outerbridge canvas, but there are some input parameters that need to be configured.
+
+### Discord node
+
+- Change the Webhook URL to the channel you would like to post the message. Official guide from Discord: [Making a Webhook](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks)
+
+![image](https://outerbridgepage.s3.eu-west-1.amazonaws.com/listen-webhook/discord-webhookurl.png)
+
+### Webhook node
+
+- Nothing needs to be changed. Just copy the URL onto clipboard.
+
+![image](https://outerbridgepage.s3.eu-west-1.amazonaws.com/listen-webhook/copy-webhook-url.png)
+
+Click `Save` -> `Deploy`. You now have a workflow ready to listen for webhook, now let's setup the webhook.
+
+## Moralis Webhook Setup
+
+You can follow the tutorial below:
+
+<div className="flex">
+  <iframe
+    width="100%"
+    height="450"
+    src="https://www.youtube.com/embed/GiDXKT_AAIs"
+    frameBorder="0"
+    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+In the Webhook URL section, fill in the URL you have copied from Outerbridge Webhook node.
+
+![image](https://outerbridgepage.s3.eu-west-1.amazonaws.com/listen-webhook/moralis-webhook.png)
+
+## Test Workflow
+
+Navigate to the block explorer page of the contract you just deployed, connect to your wallet, and execute the function.
+In this case, the deployed smart contract has a function named `newDonation`, let's enter a value and write the transaction.
+
+![image](https://outerbridgepage.s3.eu-west-1.amazonaws.com/listen-webhook/new-donation.png)
+
+Voila! You should receive a new Discord message 🥳
+
+![image](https://outerbridgepage.s3.eu-west-1.amazonaws.com/listen-webhook/discord-notification.png)
