@@ -261,4 +261,218 @@ export const templates = {
       },
     ],
   },
+  'footprint-analytics': {
+    nodes: [
+      {
+        width: 200,
+        height: 86,
+        id: 'footprintAnalytics_0',
+        position: {
+          x: 711,
+          y: 269,
+        },
+        type: 'customNode',
+        data: {
+          label: 'Get Compound Finance Transactions',
+          name: 'footprintAnalytics',
+          type: 'action',
+          inputAnchors: [
+            {
+              id: 'footprintAnalytics_0-input-0',
+            },
+          ],
+          outputAnchors: [
+            {
+              id: 'footprintAnalytics_0-output-0',
+            },
+          ],
+          selected: false,
+          inputParameters: {
+            chain: 'Ethereum',
+            protocol_slug: 'compound',
+            contract_address: '',
+            wallet_address: '',
+            start_time: '',
+            end_time: '',
+            limit: '',
+            offset: '',
+            submit: null,
+          },
+          actions: {
+            api: 'restAPI',
+            category: 'gamefi',
+            operation: 'protocolTransactions',
+            submit: null,
+          },
+          credentials: {
+            credentialMethod: 'footprintAnalyticsApi',
+            submit: null,
+          },
+        },
+        positionAbsolute: {
+          x: 711,
+          y: 269,
+        },
+        selected: false,
+        dragging: false,
+      },
+      {
+        width: 200,
+        height: 66,
+        id: 'scheduler_0',
+        position: {
+          x: 710.75,
+          y: 149.75,
+        },
+        type: 'customNode',
+        data: {
+          label: 'Every 24 hours',
+          name: 'scheduler',
+          type: 'trigger',
+          inputAnchors: [],
+          outputAnchors: [
+            {
+              id: 'scheduler_0-output-0',
+            },
+          ],
+          selected: false,
+          inputParameters: {
+            pattern: 'repetitive',
+            scheduleTimes: [
+              {
+                mode: 'everyX',
+                specificDateTime: '',
+                hour: 14,
+                minute: 35,
+                dayOfMonth: 18,
+                weekday: '3',
+                value: '24',
+                unit: 'hours',
+              },
+            ],
+            submit: null,
+          },
+        },
+        selected: false,
+        positionAbsolute: {
+          x: 710.75,
+          y: 149.75,
+        },
+        dragging: false,
+      },
+      {
+        width: 200,
+        height: 66,
+        id: 'discord_0',
+        position: {
+          x: 711.5550723679196,
+          y: 520.1788449119251,
+        },
+        type: 'customNode',
+        data: {
+          label: 'Send Discord Alert',
+          name: 'discord',
+          type: 'action',
+          inputAnchors: [
+            {
+              id: 'discord_0-input-0',
+            },
+          ],
+          outputAnchors: [
+            {
+              id: 'discord_0-output-0',
+            },
+          ],
+          selected: false,
+          inputParameters: {
+            webhookUrl: 'https://discord.com/api/webhooks/{replace-id}',
+            content:
+              'Alert 🚨\n\nHigh amount of token transfer!\n\nAmount: {{nodeJS_0[$index].data.amount}}\nWallet: {{nodeJS_0[$index].data.wallet_address}}\n\n\n\n\n',
+            username: '',
+            avatarUrl: '',
+            tts: '',
+            submit: null,
+          },
+        },
+        selected: false,
+        positionAbsolute: {
+          x: 711.5550723679196,
+          y: 520.1788449119251,
+        },
+        dragging: false,
+      },
+      {
+        width: 200,
+        height: 66,
+        id: 'nodeJS_0',
+        position: {
+          x: 711.2815382026736,
+          y: 409.3567116023884,
+        },
+        type: 'customNode',
+        data: {
+          label: 'Get Transactions with amount > 20',
+          name: 'nodeJS',
+          type: 'action',
+          inputAnchors: [
+            {
+              id: 'nodeJS_0-input-0',
+            },
+          ],
+          outputAnchors: [
+            {
+              id: 'nodeJS_0-output-0',
+            },
+          ],
+          selected: false,
+          inputParameters: {
+            code: 'const returnData = [];\nconst queryData = {{footprintAnalytics_0[0].data.data}};\n\nfor (const data of queryData) {\n  if (Number(data.amount) > 20) {\n    returnData .push(data);\n  }\n}\n\nreturn returnData;',
+            external: '',
+            submit: null,
+          },
+        },
+        selected: false,
+        positionAbsolute: {
+          x: 711.2815382026736,
+          y: 409.3567116023884,
+        },
+        dragging: false,
+      },
+    ],
+    edges: [
+      {
+        source: 'scheduler_0',
+        sourceHandle: 'scheduler_0-output-0',
+        target: 'footprintAnalytics_0',
+        targetHandle: 'footprintAnalytics_0-input-0',
+        type: 'buttonedge',
+        id: 'scheduler_0-scheduler_0-output-0-footprintAnalytics_0-footprintAnalytics_0-input-0',
+        data: {
+          label: '',
+        },
+      },
+      {
+        source: 'footprintAnalytics_0',
+        sourceHandle: 'footprintAnalytics_0-output-0',
+        target: 'nodeJS_0',
+        targetHandle: 'nodeJS_0-input-0',
+        type: 'buttonedge',
+        id: 'footprintAnalytics_0-footprintAnalytics_0-output-0-nodeJS_0-nodeJS_0-input-0',
+        data: {
+          label: '',
+        },
+      },
+      {
+        source: 'nodeJS_0',
+        sourceHandle: 'nodeJS_0-output-0',
+        target: 'discord_0',
+        targetHandle: 'discord_0-input-0',
+        type: 'buttonedge',
+        id: 'nodeJS_0-nodeJS_0-output-0-discord_0-discord_0-input-0',
+        data: {
+          label: '',
+        },
+      },
+    ],
+  },
 }
