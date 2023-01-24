@@ -1,0 +1,33 @@
+---
+title: 'Footprint Analytics X Outerbridge'
+date: '2023-01-24'
+lastmod: '2023-01-24'
+tags: ['Footprint Analytics', 'Announcement', 'Template']
+draft: false
+summary: 'Footprint Analytics provides API and visualization tools to uncover and visualize data across the blockchain, including NFT and GameFi data.'
+authors: ['default']
+images: ['https://outerbridgepage.s3.eu-west-1.amazonaws.com/FootprintAnalyticsWorkflow.png']
+template: 'footprint-analytics'
+---
+
+![image](https://outerbridgepage.s3.eu-west-1.amazonaws.com/FootprintAnalytics.png)
+
+## Footprint Analytics X Outerbridge
+
+[Footprint Analytics](https://www.footprint.network/) provides API and visualization tools to uncover and visualize data across the blockchain, including NFT and GameFi data.
+Outerbridge is proud to announce partnership with Footprint Analytics 💪
+With integration of powerful and data-rich SQL/Data API from Footprint Analytics, users are now able to perform automation tasks with little to no coding required.
+
+### Monitor Compound Finance Transactions
+
+One of the most common use cases is monitoring blockchain data and alert users if red flags/dangerous signals are detected.
+Below is an example workflow used to schedule a 24 hours timer to monitor [Compound Finance](https://compound.finance/) transactions, and send Discord message if transaction amount is over certain threshold.
+
+![image](https://outerbridgepage.s3.eu-west-1.amazonaws.com/FootprintAnalyticsWorkflow.png)
+
+1. **Scheduler Node**: Once the workflow is deployed, every 24 hours, the workflow will be started
+2. **Footprint Analytics Node**: Get Compound Finance transactions data
+3. **NodeJS Node**: Filter transactions with amount > 20
+4. **Discord Node**: For each filtered transaction with amount > 20, send a tailored message to Discord channel
+
+🎉 Voila! You now have a fully-automated workflow that will send you messages on Discord whenever transactions with amount > 20 are detected on Compound Finance.
