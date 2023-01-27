@@ -475,4 +475,99 @@ export const templates = {
       },
     ],
   },
+  'monitor-flow-balance': {
+    nodes: [
+      {
+        width: 200,
+        height: 65,
+        id: 'FlowBalanceTrigger_0',
+        position: {
+          x: 813.5,
+          y: 246,
+        },
+        type: 'customNode',
+        data: {
+          label: 'Flow Balance Trigger',
+          name: 'FlowBalanceTrigger',
+          type: 'trigger',
+          inputAnchors: [],
+          outputAnchors: [
+            {
+              id: 'FlowBalanceTrigger_0-output-0',
+            },
+          ],
+          selected: false,
+          inputParameters: {
+            address: '0xb9fa4996b8fba80c',
+            triggerCondition: 'decrease',
+            pollTime: '15s',
+            submit: null,
+          },
+          networks: {
+            network: 'testnet',
+            submit: null,
+          },
+        },
+        selected: false,
+        positionAbsolute: {
+          x: 813.5,
+          y: 246,
+        },
+        dragging: false,
+      },
+      {
+        width: 200,
+        height: 65,
+        id: 'discord_0',
+        position: {
+          x: 835,
+          y: 376.75,
+        },
+        type: 'customNode',
+        data: {
+          label: 'Discord',
+          name: 'discord',
+          type: 'action',
+          inputAnchors: [
+            {
+              id: 'discord_0-input-0',
+            },
+          ],
+          outputAnchors: [
+            {
+              id: 'discord_0-output-0',
+            },
+          ],
+          selected: false,
+          inputParameters: {
+            webhookUrl:
+              'https://discord.com/api/webhooks/1066172161267613757/Er9Egvizejfn5_MEuyLY41OoKSyUHB9M5zCn41wXFIpqQUMcHb9lSfsPmVrbHGoa78Mg',
+            content: 'New balance {{FlowBalanceTrigger_0[0].data.newBalance}}',
+            username: 'peixer',
+            avatarUrl: '',
+            tts: '',
+            submit: null,
+          },
+        },
+        selected: false,
+        positionAbsolute: {
+          x: 835,
+          y: 376.75,
+        },
+      },
+    ],
+    edges: [
+      {
+        source: 'FlowBalanceTrigger_0',
+        sourceHandle: 'FlowBalanceTrigger_0-output-0',
+        target: 'discord_0',
+        targetHandle: 'discord_0-input-0',
+        type: 'buttonedge',
+        id: 'FlowBalanceTrigger_0-FlowBalanceTrigger_0-output-0-discord_0-discord_0-input-0',
+        data: {
+          label: '',
+        },
+      },
+    ],
+  },
 }
