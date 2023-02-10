@@ -1,0 +1,56 @@
+---
+title: 'Request Finance X Outerbridge'
+date: '2023-02-10'
+lastmod: '2023-02-10'
+tags: ['Request Finance', 'Template']
+draft: false
+summary: 'Request Finance is a web application for Companies, DAOs, and Freelancers to easily manage crypto invoices, salaries, and expenses in a fast, non-custodial, and compliant way. Payments can be denominated in local currencies and processed in crypto.'
+authors: ['default']
+images: ['https://outerbridgepage.s3.eu-west-1.amazonaws.com/RequestFinance.png']
+template: 'request-finance'
+---
+
+import { useState } from 'react'
+import { templates } from '@/data/template.js'
+
+export const MyDynamicButton = ({buttonText, copyTemplate}) => {
+  const [count, setCount] = useState(0)
+  const [copied, setCopied] = useState(false)
+
+const onCopy = () => {
+setCopied(true)
+navigator.clipboard.writeText(JSON.stringify(templates[copyTemplate]))
+setTimeout(() => {
+setCopied(false)
+}, 5000)
+}
+
+return <button style={{ height: 50 }}
+className={`w-full rounded-md bg-primary-500 py-2 px-4 font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 dark:ring-offset-black dark:hover:bg-primary-400 sm:py-0`} onClick={onCopy}>{copied ? 'Workflow Copied ✅' : buttonText } </button>
+}
+
+## Request Finance X Outerbridge
+
+[Request Finance](https://www.request.finance/) is a web application for Companies, DAOs, and Freelancers to easily manage crypto invoices, salaries, and expenses in a fast, non-custodial, and compliant way. Payments can be denominated in local currencies and processed in crypto.
+
+Outerbridge has worked with Request Finance team to have APIs integrated, allowing users to build workflow automation such as getting notification from new invoice, monitor invoice status update, invoice and salary payment creation.
+
+### Create on-chain invoice upon webhook call
+
+![image](https://outerbridgepage.s3.eu-west-1.amazonaws.com/RequestFinance.png)
+
+<MyDynamicButton buttonText="Use Create Invoice Workflow" copyTemplate="request-finance" />
+
+1. **Webhook Node**: Start workflow whenever webhook is called
+2. **Request Finance Node**: Create new on-chain invoice
+
+### [Extra Template] New invoice
+
+![image](https://outerbridgepage.s3.eu-west-1.amazonaws.com/newinvoice.png)
+
+<MyDynamicButton buttonText="Use New Invoice Workflow" copyTemplate="new-request-invoice" />
+
+1. **Request Finance Trigger Node**: Start workflow whenever receive new invoice
+2. **Discord Node**: Send discord message with invoice details
+
+🤔 Creativity time! Now it's your turn to build workflow using Request Finance node.
