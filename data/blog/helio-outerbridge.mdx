@@ -1,0 +1,34 @@
+---
+title: 'Monitor Web3 payment via Helio Webhook'
+date: '2023-02-14'
+lastmod: '2023-02-14'
+tags: ['Helio', 'Template']
+draft: false
+summary: 'Helio is a complete Web3 payments platform that makes it easy for merchants and creators to accept crypto payments for e-commerce, NFT sales, subscription payments, token-swapped payments, content paywalls, and more.'
+authors: ['default']
+images: ['https://outerbridgepage.s3.eu-west-1.amazonaws.com/HelioXOuterbridge.png']
+template: 'helio'
+---
+
+## Helio X Outerbridge
+
+[Helio](https://www.hel.io/) is a complete Web3 payments platform that makes it easy for merchants and creators to accept crypto payments for e-commerce, NFT sales, subscription payments, token-swapped payments, content paywalls, and more.
+
+Helio offers powerful APIs and Webhooks that allow developers to build custom automation and UI/UX. With Helio integration on Outerbridge, users can build automation workflow without coding.
+
+One such use cases would be listen to successful payment, update Google Sheet and send a Slack/Discord notification.
+
+### Update GSheet and add contacts to CRM upon successful Helio payment
+
+Below is an example workflow that listen to successful payment made via Helio, update GoogleSheet, add the user to Mailchimp and Hubspot contact list.
+This allows businesses to keep track of the updated transactions and contacts for follow up emails, campaigns and feedback.
+
+![image](https://outerbridgepage.s3.eu-west-1.amazonaws.com/HelioXOuterbridge.png)
+
+1. **Helio Webhook**: Will trigger workflow whenever a successful payment is made via Helio
+2. **Helio Node**: Get all the transactions from user account
+3. **Google Sheet Node**: Remove all data, add headers, and add all the transactions to new rows
+4. **Mailchimp Node**: Create/add user email to subscribe list
+5. **Hubspot Node**: Create/add user email to contact list
+
+You can also add Discord/Slack/Teams node for notification purpose 🔔

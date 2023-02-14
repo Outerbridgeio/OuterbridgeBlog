@@ -713,4 +713,395 @@ export const templates = {
       },
     ],
   },
+  helio: {
+    nodes: [
+      {
+        width: 200,
+        height: 65,
+        id: 'helioWebhook_0',
+        position: {
+          x: 307.4664415821882,
+          y: 382.65432434933894,
+        },
+        type: 'customNode',
+        data: {
+          label: 'New Paylink Webhook',
+          name: 'helioWebhook',
+          type: 'webhook',
+          inputAnchors: [],
+          outputAnchors: [
+            {
+              id: 'helioWebhook_0-output-0',
+            },
+          ],
+          selected: false,
+          inputParameters: {
+            paylinkId: '63eb6690ce2cefc141882b34',
+            submit: null,
+          },
+          actions: {
+            event: 'CREATED',
+            submit: null,
+          },
+          networks: {
+            network: 'test',
+            submit: null,
+          },
+          credentials: {
+            credentialMethod: 'helioApi',
+            submit: null,
+          },
+        },
+        positionAbsolute: {
+          x: 307.4664415821882,
+          y: 382.65432434933894,
+        },
+        selected: false,
+        dragging: false,
+      },
+      {
+        width: 200,
+        height: 65,
+        id: 'helio_0',
+        position: {
+          x: 570.6209265450567,
+          y: 276.58208449956567,
+        },
+        type: 'customNode',
+        data: {
+          label: 'Get All Transactions',
+          name: 'helio',
+          type: 'action',
+          inputAnchors: [
+            {
+              id: 'helio_0-input-0',
+            },
+          ],
+          outputAnchors: [
+            {
+              id: 'helio_0-output-0',
+            },
+          ],
+          selected: false,
+          actions: {
+            operation: 'listTransactions',
+            submit: null,
+          },
+          networks: {
+            network: 'test',
+            submit: null,
+          },
+          credentials: {
+            credentialMethod: 'helioApi',
+            submit: null,
+          },
+        },
+        selected: false,
+        positionAbsolute: {
+          x: 570.6209265450567,
+          y: 276.58208449956567,
+        },
+        dragging: false,
+      },
+      {
+        width: 200,
+        height: 65,
+        id: 'googleSheet_0',
+        position: {
+          x: 1274.4358774385116,
+          y: 270.7202380014747,
+        },
+        type: 'customNode',
+        data: {
+          label: 'Add row',
+          name: 'googleSheet',
+          type: 'action',
+          inputAnchors: [
+            {
+              id: 'googleSheet_0-input-0',
+            },
+          ],
+          outputAnchors: [
+            {
+              id: 'googleSheet_0-output-0',
+            },
+          ],
+          selected: false,
+          inputParameters: {
+            spreadsheetId: '1X8QQXM-MEXVaVUh3dgfziDZvON7m0tfjf3XnbCQvz1w',
+            sheetName: 'Sheet1',
+            rowValues:
+              '[\n  [\n    "{{helio_0[$index].data.id}}",\n    "{{helio_0[$index].data.paymentRequestName}}",\n    "{{helio_0[$index].data.paymentRequestUrl}}",\n    "{{helio_0[$index].data.time}}",\n    "{{helio_0[$index].data.convertedAmount}}",\n    "{{helio_0[$index].data.currency}}",\n    "{{helio_0[$index].data.blockchain}}",\n    "{{helio_0[$index].data.from}}"\n  ]\n]\n    ',
+            submit: null,
+          },
+          actions: {
+            operation: 'addRows',
+            submit: null,
+          },
+          credentials: {
+            credentialMethod: 'googleSheetsOAuth2Api',
+            submit: null,
+          },
+        },
+        selected: false,
+        positionAbsolute: {
+          x: 1274.4358774385116,
+          y: 270.7202380014747,
+        },
+        dragging: false,
+      },
+      {
+        width: 200,
+        height: 65,
+        id: 'googleSheet_1',
+        position: {
+          x: 810.1256539072806,
+          y: 273.22707095840155,
+        },
+        type: 'customNode',
+        data: {
+          label: 'Clear All',
+          name: 'googleSheet',
+          type: 'action',
+          inputAnchors: [
+            {
+              id: 'googleSheet_1-input-0',
+            },
+          ],
+          outputAnchors: [
+            {
+              id: 'googleSheet_1-output-0',
+            },
+          ],
+          selected: false,
+          inputParameters: {
+            spreadsheetId: '1X8QQXM-MEXVaVUh3dgfziDZvON7m0tfjf3XnbCQvz1w',
+            sheetName: 'Sheet1',
+            submit: null,
+          },
+          actions: {
+            operation: 'clearAll',
+            submit: null,
+          },
+          credentials: {
+            credentialMethod: 'googleSheetsOAuth2Api',
+            submit: null,
+          },
+        },
+        selected: false,
+        positionAbsolute: {
+          x: 810.1256539072806,
+          y: 273.22707095840155,
+        },
+        dragging: false,
+      },
+      {
+        width: 200,
+        height: 65,
+        id: 'googleSheet_2',
+        position: {
+          x: 1040.5256589887517,
+          y: 271.5921937942891,
+        },
+        type: 'customNode',
+        data: {
+          label: 'Add headers',
+          name: 'googleSheet',
+          type: 'action',
+          inputAnchors: [
+            {
+              id: 'googleSheet_2-input-0',
+            },
+          ],
+          outputAnchors: [
+            {
+              id: 'googleSheet_2-output-0',
+            },
+          ],
+          selected: false,
+          inputParameters: {
+            spreadsheetId: '1X8QQXM-MEXVaVUh3dgfziDZvON7m0tfjf3XnbCQvz1w',
+            sheetName: 'Sheet1',
+            rowValues:
+              '[["ID", "NAME", "URL", "TIME", "AMOUNT", "CURRENCY", "BLOCKCHAIN", "FROM"]]',
+            submit: null,
+          },
+          actions: {
+            operation: 'addRows',
+            submit: null,
+          },
+          credentials: {
+            credentialMethod: 'googleSheetsOAuth2Api',
+            submit: null,
+          },
+        },
+        selected: false,
+        positionAbsolute: {
+          x: 1040.5256589887517,
+          y: 271.5921937942891,
+        },
+        dragging: false,
+      },
+      {
+        width: 200,
+        height: 65,
+        id: 'mailchimp_0',
+        position: {
+          x: 571.3298938789953,
+          y: 377.7255447737984,
+        },
+        type: 'customNode',
+        data: {
+          label: 'Add user to Mailchimp',
+          name: 'mailchimp',
+          type: 'action',
+          inputAnchors: [
+            {
+              id: 'mailchimp_0-input-0',
+            },
+          ],
+          outputAnchors: [
+            {
+              id: 'mailchimp_0-output-0',
+            },
+          ],
+          selected: false,
+          inputParameters: {
+            listId: 'baffe8be94',
+            email: '{{helioWebhook_0[0].data.body.transactionObject.meta.customerDetails.email}}',
+            submit: null,
+          },
+          actions: {
+            operation: 'addUser',
+            submit: null,
+          },
+          credentials: {
+            credentialMethod: 'mailChimpCredential',
+            submit: null,
+          },
+        },
+        selected: false,
+        positionAbsolute: {
+          x: 571.3298938789953,
+          y: 377.7255447737984,
+        },
+        dragging: false,
+      },
+      {
+        width: 200,
+        height: 65,
+        id: 'hubspot_0',
+        position: {
+          x: 571.3298938789952,
+          y: 479.278554729995,
+        },
+        type: 'customNode',
+        data: {
+          label: 'Add user to Hubspot',
+          name: 'hubspot',
+          type: 'action',
+          inputAnchors: [
+            {
+              id: 'hubspot_0-input-0',
+            },
+          ],
+          outputAnchors: [
+            {
+              id: 'hubspot_0-output-0',
+            },
+          ],
+          selected: false,
+          inputParameters: {
+            email: '{{helioWebhook_0[0].data.body.transactionObject.meta.customerDetails.email}}',
+            firstname: '',
+            lastname: '',
+            company: '',
+            submit: null,
+          },
+          actions: {
+            operation: 'addContact',
+            submit: null,
+          },
+          credentials: {
+            credentialMethod: 'hubspotCredential',
+            submit: null,
+          },
+        },
+        selected: false,
+        positionAbsolute: {
+          x: 571.3298938789952,
+          y: 479.278554729995,
+        },
+        dragging: false,
+      },
+    ],
+    edges: [
+      {
+        source: 'googleSheet_1',
+        sourceHandle: 'googleSheet_1-output-0',
+        target: 'googleSheet_2',
+        targetHandle: 'googleSheet_2-input-0',
+        type: 'buttonedge',
+        id: 'googleSheet_1-googleSheet_1-output-0-googleSheet_2-googleSheet_2-input-0',
+        data: {
+          label: '',
+        },
+      },
+      {
+        source: 'googleSheet_2',
+        sourceHandle: 'googleSheet_2-output-0',
+        target: 'googleSheet_0',
+        targetHandle: 'googleSheet_0-input-0',
+        type: 'buttonedge',
+        id: 'googleSheet_2-googleSheet_2-output-0-googleSheet_0-googleSheet_0-input-0',
+        data: {
+          label: '',
+        },
+      },
+      {
+        source: 'helio_0',
+        sourceHandle: 'helio_0-output-0',
+        target: 'googleSheet_1',
+        targetHandle: 'googleSheet_1-input-0',
+        type: 'buttonedge',
+        id: 'helio_0-helio_0-output-0-googleSheet_1-googleSheet_1-input-0',
+        data: {
+          label: '',
+        },
+      },
+      {
+        source: 'helioWebhook_0',
+        sourceHandle: 'helioWebhook_0-output-0',
+        target: 'helio_0',
+        targetHandle: 'helio_0-input-0',
+        type: 'buttonedge',
+        id: 'helioWebhook_0-helioWebhook_0-output-0-helio_0-helio_0-input-0',
+        data: {
+          label: '',
+        },
+      },
+      {
+        source: 'helioWebhook_0',
+        sourceHandle: 'helioWebhook_0-output-0',
+        target: 'mailchimp_0',
+        targetHandle: 'mailchimp_0-input-0',
+        type: 'buttonedge',
+        id: 'helioWebhook_0-helioWebhook_0-output-0-mailchimp_0-mailchimp_0-input-0',
+        data: {
+          label: '',
+        },
+      },
+      {
+        source: 'helioWebhook_0',
+        sourceHandle: 'helioWebhook_0-output-0',
+        target: 'hubspot_0',
+        targetHandle: 'hubspot_0-input-0',
+        type: 'buttonedge',
+        id: 'helioWebhook_0-helioWebhook_0-output-0-hubspot_0-hubspot_0-input-0',
+        data: {
+          label: '',
+        },
+      },
+    ],
+  },
 }
