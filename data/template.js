@@ -720,8 +720,8 @@ export const templates = {
         height: 65,
         id: 'helioWebhook_0',
         position: {
-          x: 307.4664415821882,
-          y: 382.65432434933894,
+          x: 361.92784887284745,
+          y: 179.9368638785519,
         },
         type: 'customNode',
         data: {
@@ -753,8 +753,8 @@ export const templates = {
           },
         },
         positionAbsolute: {
-          x: 307.4664415821882,
-          y: 382.65432434933894,
+          x: 361.92784887284745,
+          y: 179.9368638785519,
         },
         selected: false,
         dragging: false,
@@ -764,8 +764,8 @@ export const templates = {
         height: 65,
         id: 'helio_0',
         position: {
-          x: 570.6209265450567,
-          y: 276.58208449956567,
+          x: 572.6582621658308,
+          y: 322.44512708688933,
         },
         type: 'customNode',
         data: {
@@ -798,8 +798,8 @@ export const templates = {
         },
         selected: false,
         positionAbsolute: {
-          x: 570.6209265450567,
-          y: 276.58208449956567,
+          x: 572.6582621658308,
+          y: 322.44512708688933,
         },
         dragging: false,
       },
@@ -808,8 +808,8 @@ export const templates = {
         height: 65,
         id: 'googleSheet_0',
         position: {
-          x: 1274.4358774385116,
-          y: 270.7202380014747,
+          x: 570.7325651818827,
+          y: 632.9757171806706,
         },
         type: 'customNode',
         data: {
@@ -839,14 +839,14 @@ export const templates = {
             submit: null,
           },
           credentials: {
-            credentialMethod: 'googleSheetsOAuth2Api',
+            credentialMethod: 'googleSheetsOAuth2Api_Outerbridge',
             submit: null,
           },
         },
         selected: false,
         positionAbsolute: {
-          x: 1274.4358774385116,
-          y: 270.7202380014747,
+          x: 570.7325651818827,
+          y: 632.9757171806706,
         },
         dragging: false,
       },
@@ -855,8 +855,8 @@ export const templates = {
         height: 65,
         id: 'googleSheet_1',
         position: {
-          x: 810.1256539072806,
-          y: 273.22707095840155,
+          x: 572.657409201124,
+          y: 425.95174598510624,
         },
         type: 'customNode',
         data: {
@@ -884,14 +884,14 @@ export const templates = {
             submit: null,
           },
           credentials: {
-            credentialMethod: 'googleSheetsOAuth2Api',
+            credentialMethod: 'googleSheetsOAuth2Api_Outerbridge',
             submit: null,
           },
         },
         selected: false,
         positionAbsolute: {
-          x: 810.1256539072806,
-          y: 273.22707095840155,
+          x: 572.657409201124,
+          y: 425.95174598510624,
         },
         dragging: false,
       },
@@ -900,8 +900,8 @@ export const templates = {
         height: 65,
         id: 'googleSheet_2',
         position: {
-          x: 1040.5256589887517,
-          y: 271.5921937942891,
+          x: 572.107905705627,
+          y: 530.4791429249226,
         },
         type: 'customNode',
         data: {
@@ -931,14 +931,14 @@ export const templates = {
             submit: null,
           },
           credentials: {
-            credentialMethod: 'googleSheetsOAuth2Api',
+            credentialMethod: 'googleSheetsOAuth2Api_Outerbridge',
             submit: null,
           },
         },
         selected: false,
         positionAbsolute: {
-          x: 1040.5256589887517,
-          y: 271.5921937942891,
+          x: 572.107905705627,
+          y: 530.4791429249226,
         },
         dragging: false,
       },
@@ -947,8 +947,8 @@ export const templates = {
         height: 65,
         id: 'mailchimp_0',
         position: {
-          x: 571.3298938789953,
-          y: 377.7255447737984,
+          x: 140.17708616127646,
+          y: 318.72568687558424,
         },
         type: 'customNode',
         data: {
@@ -982,8 +982,8 @@ export const templates = {
         },
         selected: false,
         positionAbsolute: {
-          x: 571.3298938789953,
-          y: 377.7255447737984,
+          x: 140.17708616127646,
+          y: 318.72568687558424,
         },
         dragging: false,
       },
@@ -992,8 +992,8 @@ export const templates = {
         height: 65,
         id: 'hubspot_0',
         position: {
-          x: 571.3298938789952,
-          y: 479.278554729995,
+          x: 360.29194062769074,
+          y: 318.9199665963873,
         },
         type: 'customNode',
         data: {
@@ -1029,8 +1029,8 @@ export const templates = {
         },
         selected: false,
         positionAbsolute: {
-          x: 571.3298938789952,
-          y: 479.278554729995,
+          x: 360.29194062769074,
+          y: 318.9199665963873,
         },
         dragging: false,
       },
