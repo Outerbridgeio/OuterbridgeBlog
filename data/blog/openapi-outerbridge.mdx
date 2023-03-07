@@ -1,0 +1,97 @@
+---
+title: 'OpenAI + Outerbridge'
+date: '2023-03-07'
+lastmod: '2023-03-07'
+tags: ['OpenAI', 'Announcement', 'Template']
+draft: false
+summary: 'OpenAI APIs are now available on Outerbridge! You can now use ChatGPT, Image generation and Text completion powered by OpenAI to build automated workflows such as writing posts, generate content and etc.'
+authors: ['default']
+images: ['https://outerbridgepage.s3.eu-west-1.amazonaws.com/OpenAIXOuterbridge.png']
+---
+
+import { useState } from 'react'
+import { templates } from '@/data/template.js'
+
+export const MyDynamicButton = ({buttonText, copyTemplate}) => {
+  const [count, setCount] = useState(0)
+  const [copied, setCopied] = useState(false)
+
+const onCopy = () => {
+setCopied(true)
+navigator.clipboard.writeText(JSON.stringify(templates[copyTemplate]))
+setTimeout(() => {
+setCopied(false)
+}, 5000)
+}
+
+return <button style={{ height: 50 }}
+className={`w-full rounded-md bg-primary-500 py-2 px-4 font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 dark:ring-offset-black dark:hover:bg-primary-400 sm:py-0`} onClick={onCopy}>{copied ? 'Workflow Copied ✅' : buttonText } </button>
+}
+
+## OpenAI + Outerbridge
+
+![image](https://outerbridgepage.s3.eu-west-1.amazonaws.com/OpenAIXOuterbridge.png)
+
+[OpenAI](https://openai.com/) APIs are now available on Outerbridge! You can now use ChatGPT, Image generation and Text completion powered by OpenAI to build automated workflows such as writing posts, generate content and etc.
+To get started, we have prepared 2 workflows:
+
+### ChatGPT to Discord
+
+Write a prompt and have ChatGPT response posted in Discord channel
+
+<div className="flex">
+  <iframe
+    width="100%"
+    height="450"
+    src="https://www.youtube.com/embed/t_5DdFHveIg"
+    frameBorder="0"
+    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+<br />
+<MyDynamicButton buttonText="Use ChatGPT Workflow" copyTemplate="chatgpt" />
+<br />
+1. **OpenAI Node**: Provide OpenAI [API key](https://platform.openai.com/account/api-keys) and a
+text prompt, then have ChatGPT returning the response
+
+2. **Discord Node**: Get the response from ChatGPT, and post the message to channel
+
+### Create NFT with AI generated image
+
+Write an image description for AI to generate, and automatically create NFT from the image
+
+<div className="flex">
+  <iframe
+    width="100%"
+    height="450"
+    src="https://www.youtube.com/embed/6TJLA52hH7w"
+    frameBorder="0"
+    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+<br />
+<MyDynamicButton buttonText="Use Create NFT with AI Workflow" copyTemplate="dalle" />
+<br />
+1. **OpenAI Node**: Provide OpenAI [API key](https://platform.openai.com/account/api-keys) and a
+text prompt, then have OpenAI (Dall-E) returning the generated image in raw format (base64){' '}
+
+2. **Pinata Node**: Since we need to store the image somewhere, we will use Pinata to store in on IPFS
+
+3. **ThirdWeb Node**: Using ThirdWeb and the stored image path, create an NFT
+
+### Wrap it up
+
+That's how easy it is to use OpenAI on Outerbridge! Click the workflow you'd like to use, then paste it onto a new canvas in [Outerbridge](https://outerbridge.io).
+
+<div className="flex">
+  <img
+    src="https://outerbridgepage.s3.eu-west-1.amazonaws.com/mind-blow-galaxy.gif"
+    alt="MindBlown"
+    width="100%"
+    height="auto"
+  />
+</div>
+Now, use your imagination to build workflows using OpenAPI integration! Reach us out in [Discord](https://discord.com/invite/Y9VE4ykPDJ)
+and we'd happy to answer and assist!

@@ -122,7 +122,7 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
                     </div>
                   </div>
                 )}
-                {tags && tags.includes('Template') && (
+                {template && tags && tags.includes('Template') && (
                   <div className="py-4 xl:py-8">
                     <button
                       style={{ height: 50 }}

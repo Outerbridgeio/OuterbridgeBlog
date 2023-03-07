@@ -1104,4 +1104,277 @@ export const templates = {
       },
     ],
   },
+  dalle: {
+    nodes: [
+      {
+        width: 200,
+        height: 66,
+        id: 'pinata_0',
+        position: {
+          x: 924.7308060636885,
+          y: 60.421419571065684,
+        },
+        type: 'customNode',
+        data: {
+          label: 'Save NFT Image to IPFS',
+          name: 'pinata',
+          type: 'action',
+          inputAnchors: [
+            {
+              id: 'pinata_0-input-0',
+            },
+          ],
+          outputAnchors: [
+            {
+              id: 'pinata_0-output-0',
+            },
+          ],
+          selected: false,
+          inputParameters: {
+            cidVersion: '',
+            wrapWithDirectory: true,
+            name: 'PuppyV1',
+            keyvalues: '',
+            submit: null,
+          },
+          actions: {
+            operation: 'base64',
+            base64Content: '{{openAI_0[0].data.data[0].b64_json}}',
+            submit: null,
+          },
+          credentials: {
+            credentialMethod: 'pinataApi',
+            submit: null,
+          },
+        },
+        selected: false,
+        positionAbsolute: {
+          x: 924.7308060636885,
+          y: 60.421419571065684,
+        },
+        dragging: false,
+      },
+      {
+        width: 200,
+        height: 66,
+        id: 'openAI_0',
+        position: {
+          x: 925.1039110873497,
+          y: -61.476144724398026,
+        },
+        type: 'customNode',
+        data: {
+          label: 'Generate Image',
+          name: 'openAI',
+          type: 'action',
+          inputAnchors: [
+            {
+              id: 'openAI_0-input-0',
+            },
+          ],
+          outputAnchors: [
+            {
+              id: 'openAI_0-output-0',
+            },
+          ],
+          selected: false,
+          inputParameters: {
+            prompt: '3D image of a puppy reading a book',
+            imageNumber: '1',
+            imageSize: '1024x1024',
+            response_format: 'b64_json',
+            submit: null,
+          },
+          actions: {
+            operation: 'generateImage',
+            submit: null,
+          },
+          credentials: {
+            credentialMethod: 'openAIApi',
+            submit: null,
+          },
+        },
+        positionAbsolute: {
+          x: 925.1039110873497,
+          y: -61.476144724398026,
+        },
+        selected: false,
+        dragging: false,
+      },
+      {
+        width: 200,
+        height: 66,
+        id: 'thirdWeb_1',
+        position: {
+          x: 925.2172025607864,
+          y: 183.1230967687086,
+        },
+        type: 'customNode',
+        data: {
+          label: 'Mint new NFT',
+          name: 'thirdWeb',
+          type: 'action',
+          inputAnchors: [
+            {
+              id: 'thirdWeb_1-input-0',
+            },
+          ],
+          outputAnchors: [
+            {
+              id: 'thirdWeb_1-output-0',
+            },
+          ],
+          selected: false,
+          inputParameters: {
+            contract: '0x2fbe6E3d9bA038DBb066b8Fddb08a507eA696FB9',
+            contractType: 'nft-collection',
+            code: 'const ipfsHash = {{pinata_0[0].data.IpfsHash}};\nconst nftName = "PuppyV1";\nconst imageName = encodeURIComponent(nftName);\n\nconst metadata = {\n  name: nftName,\n  description: "This is a cool puppy",\n  image: `ipfs://${ipfsHash}/${imageName}.png`,\n  properties: {"attribute": "reading"}\n};\n\nconst results = await contract.erc721.mint(metadata);\nreturn await results.data();',
+            external: '',
+            submit: null,
+          },
+          actions: {
+            operation: 'execute',
+            submit: null,
+          },
+          networks: {
+            network: 'mumbai',
+            submit: null,
+          },
+        },
+        selected: false,
+        positionAbsolute: {
+          x: 925.2172025607864,
+          y: 183.1230967687086,
+        },
+        dragging: false,
+      },
+    ],
+    edges: [
+      {
+        source: 'openAI_0',
+        sourceHandle: 'openAI_0-output-0',
+        target: 'pinata_0',
+        targetHandle: 'pinata_0-input-0',
+        type: 'buttonedge',
+        id: 'openAI_0-openAI_0-output-0-pinata_0-pinata_0-input-0',
+        data: {
+          label: '',
+        },
+      },
+      {
+        source: 'pinata_0',
+        sourceHandle: 'pinata_0-output-0',
+        target: 'thirdWeb_1',
+        targetHandle: 'thirdWeb_1-input-0',
+        type: 'buttonedge',
+        id: 'pinata_0-pinata_0-output-0-thirdWeb_1-thirdWeb_1-input-0',
+        data: {
+          label: '',
+        },
+      },
+    ],
+  },
+  chatgpt: {
+    nodes: [
+      {
+        width: 200,
+        height: 66,
+        id: 'openAI_0',
+        position: {
+          x: 767.5,
+          y: 203,
+        },
+        type: 'customNode',
+        data: {
+          label: 'OpenAI',
+          name: 'openAI',
+          type: 'action',
+          inputAnchors: [
+            {
+              id: 'openAI_0-input-0',
+            },
+          ],
+          outputAnchors: [
+            {
+              id: 'openAI_0-output-0',
+            },
+          ],
+          selected: false,
+          inputParameters: {
+            model: 'gpt-3.5-turbo',
+            prompt: 'Write a Discord thread on blockchain',
+            submit: null,
+          },
+          actions: {
+            operation: 'chatgpt',
+            submit: null,
+          },
+          credentials: {
+            credentialMethod: 'openAIApi',
+            submit: null,
+          },
+        },
+        selected: false,
+        positionAbsolute: {
+          x: 767.5,
+          y: 203,
+        },
+        dragging: false,
+      },
+      {
+        width: 200,
+        height: 66,
+        id: 'discord_0',
+        position: {
+          x: 768.1817153998911,
+          y: 322.3215330163391,
+        },
+        type: 'customNode',
+        data: {
+          label: 'Discord',
+          name: 'discord',
+          type: 'action',
+          inputAnchors: [
+            {
+              id: 'discord_0-input-0',
+            },
+          ],
+          outputAnchors: [
+            {
+              id: 'discord_0-output-0',
+            },
+          ],
+          selected: false,
+          inputParameters: {
+            webhookUrl:
+              'https://discord.com/api/webhooks/1014150840241623161/W3O9ohCewTq2TjLHdQ0b8CJsnPIM1sXvRJZR5_5dUlEjtMondVnR27AMosoeRRMmSwpq',
+            content: '{{openAI_0[0].data.choices[0].message.content}}',
+            username: '',
+            avatarUrl: '',
+            tts: '',
+            submit: null,
+          },
+        },
+        selected: false,
+        positionAbsolute: {
+          x: 768.1817153998911,
+          y: 322.3215330163391,
+        },
+        dragging: false,
+      },
+    ],
+    edges: [
+      {
+        source: 'openAI_0',
+        sourceHandle: 'openAI_0-output-0',
+        target: 'discord_0',
+        targetHandle: 'discord_0-input-0',
+        type: 'buttonedge',
+        id: 'openAI_0-openAI_0-output-0-discord_0-discord_0-input-0',
+        data: {
+          label: '',
+        },
+      },
+    ],
+  },
 }
