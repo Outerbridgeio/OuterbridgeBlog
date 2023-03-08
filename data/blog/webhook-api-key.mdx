@@ -1,0 +1,33 @@
+---
+title: 'Webhook API Key 🔑'
+date: '2023-03-08'
+lastmod: '2023-03-08'
+tags: ['Webhook']
+draft: false
+summary: 'Webhook API key 🔑 Users can now specify the API key that must be included in the header as X-API-KEY when calling the webhook, hence securing the webhook endpoint.'
+authors: ['default']
+---
+
+## Webhook API Key 🔑
+
+A webhook is an HTTP request, triggered by an event in a source system and sent to a destination system. Let's say if you have built a workflow on Outerbridge and you would like the workflow to start executing once a HTTP call is made, Webhook node is what you're looking for.
+
+However, anyone can call the Webhook URL and trigger the workflow, and this might cause some privacy and security issues.
+
+The solution to that is to specify an API Key that is needed to be included in the headers of the Webhook URL as `X-API-KEY`, and only execute the workflow if the API key matches.
+
+Below shows the video of how it can be used on Outerbridge:
+
+<div className="flex">
+  <iframe
+    width="100%"
+    height="450"
+    src="https://www.youtube.com/embed/KPS4_t8K1Bg"
+    frameBorder="0"
+    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+<br />
+
+Let us know if you have any suggestion or ideas, we'd love to hear em! Reach us out in [Discord](https://discord.com/invite/Y9VE4ykPDJ)!
