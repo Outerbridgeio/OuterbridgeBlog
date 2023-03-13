@@ -1377,4 +1377,143 @@ export const templates = {
       },
     ],
   },
+  chainlink: {
+    nodes: [
+      {
+        width: 200,
+        height: 86,
+        id: 'chainLinkFunctionWebhook_0',
+        position: {
+          x: 714.5,
+          y: 102.25,
+        },
+        type: 'customNode',
+        data: {
+          label: 'Chainlink Function Webhook',
+          name: 'chainLinkFunctionWebhook',
+          type: 'webhook',
+          inputAnchors: [],
+          outputAnchors: [
+            {
+              id: 'chainLinkFunctionWebhook_0-output-0',
+            },
+          ],
+          selected: false,
+          inputParameters: {
+            httpMethod: 'POST',
+            authorization: 'none',
+            submit: null,
+          },
+        },
+        selected: false,
+        positionAbsolute: {
+          x: 714.5,
+          y: 102.25,
+        },
+        dragging: false,
+      },
+      {
+        width: 200,
+        height: 66,
+        id: 'discord_0',
+        position: {
+          x: 713.5,
+          y: 250.75,
+        },
+        type: 'customNode',
+        data: {
+          label: 'Discord',
+          name: 'discord',
+          type: 'action',
+          inputAnchors: [
+            {
+              id: 'discord_0-input-0',
+            },
+          ],
+          outputAnchors: [
+            {
+              id: 'discord_0-output-0',
+            },
+          ],
+          selected: false,
+          inputParameters: {
+            webhookUrl:
+              'https://discord.com/api/webhooks/1083788317499326508/6r7OD8sri84PxlxupMuBHD3U_IqUaSVoY2Z-31rReDz0iKlQPlx6RtbQj64RlL1UyDXu',
+            content: '{{chainLinkFunctionWebhook_0[0].data.body.message}}',
+            username: '',
+            avatarUrl: '',
+            tts: '',
+            submit: null,
+          },
+        },
+        selected: false,
+        positionAbsolute: {
+          x: 713.5,
+          y: 250.75,
+        },
+        dragging: false,
+      },
+      {
+        width: 200,
+        height: 66,
+        id: 'nodeJS_0',
+        position: {
+          x: 713.2125414244422,
+          y: 376.08976486279244,
+        },
+        type: 'customNode',
+        data: {
+          label: 'NodeJS',
+          name: 'nodeJS',
+          type: 'action',
+          inputAnchors: [
+            {
+              id: 'nodeJS_0-input-0',
+            },
+          ],
+          outputAnchors: [
+            {
+              id: 'nodeJS_0-output-0',
+            },
+          ],
+          selected: false,
+          inputParameters: {
+            code: 'return {{discord_0[0].data.content}};',
+            external: '',
+            submit: null,
+          },
+        },
+        selected: false,
+        positionAbsolute: {
+          x: 713.2125414244422,
+          y: 376.08976486279244,
+        },
+        dragging: false,
+      },
+    ],
+    edges: [
+      {
+        source: 'chainLinkFunctionWebhook_0',
+        sourceHandle: 'chainLinkFunctionWebhook_0-output-0',
+        target: 'discord_0',
+        targetHandle: 'discord_0-input-0',
+        type: 'buttonedge',
+        id: 'chainLinkFunctionWebhook_0-chainLinkFunctionWebhook_0-output-0-discord_0-discord_0-input-0',
+        data: {
+          label: '',
+        },
+      },
+      {
+        source: 'discord_0',
+        sourceHandle: 'discord_0-output-0',
+        target: 'nodeJS_0',
+        targetHandle: 'nodeJS_0-input-0',
+        type: 'buttonedge',
+        id: 'discord_0-discord_0-output-0-nodeJS_0-nodeJS_0-input-0',
+        data: {
+          label: '',
+        },
+      },
+    ],
+  },
 }

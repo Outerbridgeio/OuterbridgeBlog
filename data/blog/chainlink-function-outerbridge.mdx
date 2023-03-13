@@ -1,0 +1,173 @@
+---
+title: 'How to use Chainlink Function on Outerbridge'
+date: '2023-03-12'
+lastmod: '2023-03-12'
+tags: ['Chainlink', 'Template']
+draft: false
+summary: 'Chainlink Functions allows your smart contract to execute arbitrary code which is processed by Decentralized Oracle Network (DON). Learn how to trigger a workflow in Outerbridge using Chainlink Function'
+images: ['https://outerbridgepage.s3.eu-west-1.amazonaws.com/ChainlinkXOuterbridge.png']
+authors: ['default']
+template: 'chainlink'
+---
+
+import { useState } from 'react'
+import { templates } from '@/data/template.js'
+
+export const MyDynamicButton = ({buttonText, copyTemplate}) => {
+  const [count, setCount] = useState(0)
+  const [copied, setCopied] = useState(false)
+
+const onCopy = () => {
+setCopied(true)
+navigator.clipboard.writeText(JSON.stringify(templates[copyTemplate]))
+setTimeout(() => {
+setCopied(false)
+}, 5000)
+}
+
+return <button style={{ height: 50 }}
+className={`w-full rounded-md bg-primary-500 py-2 px-4 font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 dark:ring-offset-black dark:hover:bg-primary-400 sm:py-0`} onClick={onCopy}>{copied ? 'Workflow Copied ✅' : buttonText } </button>
+}
+
+![image](https://outerbridgepage.s3.eu-west-1.amazonaws.com/ChainlinkXOuterbridge.png)
+
+## What is Chainlink Function
+
+Chainlink Functions provides your smart contracts with access to a trust-minimized compute infrastructure. Your smart contract sends your code to a Decentralized Oracle Network (DON), and each DON’s oracle runs the same code in a serverless environment.
+
+The DON aggregates all the independent runs and returns the final result to your smart contract. Your code can be anything from simple computation to fetching data from API providers.
+
+Read more on the [docs](https://docs.chain.link/chainlink-functions) page. If you want to get more ideas, here's the [example functions](https://www.usechainlinkfunctions.com/) put together by the community.
+
+## Why use Outerbridge
+
+Chainlink Function has made developers life easier, allowing us to execute Javascript code from smart contract on-chain. However, there are some caveats:
+
+- ❌ Hassle of reading 3rd party API docs to implement API calls
+- ❌ Side effect on building non-idempotent requests, such as sending an email or storing data on the cloud. Since each oracle node runs the same computation in the Off-chain Reporting protocol, it will cause redundant requests such as sending multiple emails or storing the same data multiple times.
+
+Outerbridge was able to solve this by using sticky `session-id`, everytime an execution is sent, each oracle node will receive the same `session-id`, allowing Outerbridge to detect if they are sent from the same request, hence preventing multiple redundant requests.
+More technical implementation can be found from our official Github [repo](https://github.com/Outerbridgeio/Outerbridge/blob/master/packages/server/src/utils/index.ts#L803).
+
+Outerbridge currently has 60+ integrations where users can just plug and play without having to code the entire API. Complex workflow involving multiple API providers can be easily built and configured.
+
+- ✅ Prevent multiple redundant calls
+- ✅ 60+ API integrations and growing
+- ✅ Ability to build complex workflows
+- ✅ Open source
+
+In this post, we are going to take a look at how to trigger a workflow in Outerbridge by making a HTTP call using Chainlink Function.
+
+**Let's get started 🚀🚀🚀**
+
+## Step 1: Building Workflow
+
+Here's a simple workflow that is going to send a Discord message and return the message as a response upon completion.
+
+The **GOAL** is to trigger this workflow using Chainlink Function.
+
+![image](https://outerbridgepage.s3.eu-west-1.amazonaws.com/CLFunc.gif)
+
+<MyDynamicButton buttonText="Use Chainlink Workflow" copyTemplate="chainlink" />
+<br />
+<br />
+
+1. **Chainlink Function Webhook**: Trigger workflow upon receiving the webhook call
+2. **Discord**: Send discord message to channel. (_Replace with your channel's webhook URL_)
+3. **NodeJS**: Return the message that was posted as final response
+
+Click Deploy to activate the workflow.
+
+## Step 2: Trigger workflow using Chainlink Function
+
+We are going to use the **forked** [Chainlink Functions Starter Kit](https://github.com/Outerbridgeio/functions-hardhat-starter-kit) with Hardhat to set up on-chain contracts, test request, and send request to be fulfilled by the Chainlink Functions Decentralized Oracle Network (DON).
+
+1. In a terminal, clone the **forked** [Chainlink Functions Starter Kit](https://github.com/Outerbridgeio/functions-hardhat-starter-kit) repository.
+
+2. Switch to correct branch:
+
+   ```
+   git checkout feature/Outerbridge-Webhook
+   ```
+
+3. ```
+   cd functions-hardhat-starter-kit/
+   ```
+
+4. ```
+   npm install
+   ```
+
+5. Configure `.env` file:
+
+   ```
+   touch .env && open .env
+   ```
+
+   We are going to use Mumbai testnet:
+
+   ```
+   MUMBAI_RPC_URL="https://rpc.ankr.com/polygon_mumbai"
+   PRIVATE_KEY="<YOUR_PRIVATE_KEY>"
+   ```
+
+6. Compile the contracts in the repository:
+
+   ```
+   npx hardhat compile
+   ```
+
+7. In `Functions-request-config.js` file, search for `messageToSend` and replace with whatever message that you like to post on Discord.
+
+8. In `Functions-request-source.js` file line 10, replace `url: https://app.outerbridge.io/api/v1/webhook/7ylldwflap7630p` with your webhook URL.
+   You can grab the webhook URL from Outerbridge:
+
+   - Use the **Tunnel URL** when running Outerbridge locally:
+     ![image](https://outerbridgepage.s3.eu-west-1.amazonaws.com/tunnel-webhook.png)
+
+   - Use the **Webhook URL** when using Cloud-hosted Outerbridge
+     ![image](https://outerbridgepage.s3.eu-west-1.amazonaws.com/cloud-webhook.png)
+
+9. Simulate the request:
+
+   ```
+   npx hardhat functions-simulate
+   ```
+
+   You should be able to see the message successfully posted on Discord channel.
+
+10. Follow [guides](https://docs.chain.link/chainlink-functions/getting-started#configure-your-on-chain-resources) to configure on chain resources.
+
+11. Finally, run the request. Specify your subscription ID with the `--subid` flag and specify your consumer contract address with the `--contract` flag:
+
+    ```
+    npx hardhat functions-request --subid YOUR_SUBSCRIPTION_ID --contract YOUR_CONSUMER_CONTRACT_ADDRESS --network mumbai
+    ```
+
+    If success, you should be able to see the following output:
+
+    ```
+    If all 100000 callback gas is used, this request is estimated to cost 0.200173241062964508 LINK
+    Continue? (y) Yes / (n) No
+    y
+
+    Requesting new data for FunctionsConsumer contract 0x5F5063DaE69d1b3eaE4D2409e09246D5892c714D on network mumbai
+    Waiting 2 blocks for transaction 0xd10ea65017e2b688aabd18265172ff4770297eca87dcdd2cb7a0181a90796ca8 to be confirmed...
+
+    Request 0xd8cfb094958b5417e07e768f849d1e220faf55459f64c7a2a6dde660454ac454 initiated
+    Waiting for fulfillment...
+
+    Request 0xd8cfb094958b5417e07e768f849d1e220faf55459f64c7a2a6dde660454ac454 fulfilled!
+    Response returned to client contract represented as a hex string: 0x5b7b2264617461223a2248657920446973636f726421227d5d
+    Decoded as a string: [{"data":"Hey Discord!"}]
+
+    Transmission cost: 0.001431547524481958 LINK
+    Base fee: 0.0 LINK
+    Total cost: 0.201431547524481958 LINK
+    ```
+
+🎉 That's it! You have successfully:
+
+- ✅ Built a workflow that send message to Discord, and return the message as final result back to your smart contract
+- ✅ Made a HTTP POST to webhook URL from Chainlink Function
+- ✅ Triggered the workflow
